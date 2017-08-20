@@ -84,7 +84,7 @@ app.post('/Create-User', function(req, res)
     pool.query('INSERT INTO "User" (username, password) values($1,$2)', [username, dbpassword], function(err, result){
     if(err)
      {
-     res.status(500).send(err.tostring());
+     res.status(500).send(err.toString());
      }
      else
      {
