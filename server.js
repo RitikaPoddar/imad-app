@@ -7,8 +7,8 @@ var bodyparser= require('body-parser');
 var config={
     user:'ritikapoddar1991',
     database:'ritikapoddar1991',
-    host:'http://db.imad.hasura-app.io',
-    port:5432,
+    host:'db.imad.hasura-app.io',
+    port:'5432',
     password:'db-ritikapoddar1991-19039'
 }
 
