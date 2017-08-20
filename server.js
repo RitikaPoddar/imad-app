@@ -2,6 +2,8 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool= require('pg').Pool;
+var crypto= require('crypto');
+var bodyparser= require('body-parser');
 var config={
     user:'ritikapoddar1991',
     database:'ritikapoddar1991',
@@ -12,7 +14,7 @@ var config={
 
 var app = express();
 app.use(morgan('combined'));
-
+app.use(bodyparser.json());
 var arcticles= {
     arcticleone:
     {
@@ -64,6 +66,31 @@ app.get('/test-db', function(req,res){
          res.send(json.stringify(result));
      }
  })   
+})
+
+function hash(input, salt)
+{
+    var out= crypto.pbkdf2(input,salt, 10000,512,'sha512');
+    return out.toString('hex');
+}
+
+app.post('/Create-User', function(req, res)
+{
+    //username, password
+    var username= req.body.username;
+    var password= req.body.password;
+    var salt= crypto.randomBytes(128).toString('hex');
+    var dbpassword= hash(password,salt);
+    pool.query('INSERT INTO "User" (username, password) values($1,$2)', [username, dbpassword], function(err, result){
+    if(err)
+     {
+     res.status(500).send(err.tostring());
+     }
+     else
+     {
+         res.send("User created successfully"+username);
+     }
+    });
 })
 
 app.get('/:articlename', function (req, res) {
