@@ -91,7 +91,7 @@ app.post('/Create-User', function(req, res)
          res.send("User created successfully"+username);
      }
     });
-})
+});
 
 app.post('/login', function(req,res){
     
