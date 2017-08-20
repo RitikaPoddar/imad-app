@@ -65,8 +65,8 @@ app.get('/test-db', function(req,res){
      {
          res.send(json.stringify(result));
      }
- })   
-})
+ })  ; 
+});
 
 function hash(input, salt)
 {
