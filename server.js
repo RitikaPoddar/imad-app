@@ -96,7 +96,8 @@ app.post('/Create-User', function(req, res)
 app.post('/login', function(req,res){
     
     var username= req.body.username;
-    pool.query('SELECT * FROM User where username=$1', username, function(err, result){
+    var password= req.body.password;
+    pool.query('SELECT * FROM "User" where username=$1', username, function(err, result){
         if(err)
         {
             res.status(500).send(err.toString());
@@ -110,7 +111,15 @@ app.post('/login', function(req,res){
             }
             else
             {
+                var dbstring= result.rows[0].password;
+                if(dbstring===password)
+                {
                 res.send("user found");
+                }
+                else
+                {
+                    res.send("invalid credentials");
+                }
             }
         }
     
