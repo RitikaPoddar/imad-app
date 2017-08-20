@@ -113,10 +113,9 @@ app.post('/login', function(req,res){
                 res.send("user found");
             }
         }
-        }
-        }
-    })
-})
+    
+    });
+});
 
 app.get('/:articlename', function (req, res) {
     var arcticlename=req.params.articlename;
