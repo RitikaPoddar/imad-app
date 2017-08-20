@@ -36,7 +36,7 @@ var arcticles= {
         
     }
 
-};
+}
 
 function createtemplate(data)
 {
@@ -55,6 +55,7 @@ function createtemplate(data)
     return(htmlcontent);
     
 }
+
 var pool=new Pool(config);
 app.get('/test-db', function(req,res){
  pool.query('SELECT * from Test', function(err, result){
