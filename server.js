@@ -93,6 +93,31 @@ app.post('/Create-User', function(req, res)
     });
 })
 
+app.post('/login', function(req,res){
+    
+    var username= req.body.username;
+    pool.query('SELECT * FROM User where username=$1', username, function(err, result){
+        if(err)
+        {
+            res.status(500).send(err.toString());
+        }
+        else
+        {
+            if(result.rows.length===0)
+            {
+                res.send("Invalid username/password");
+                
+            }
+            else
+            {
+                res.send("user found");
+            }
+        }
+        }
+        }
+    })
+})
+
 app.get('/:articlename', function (req, res) {
     var arcticlename=req.params.articlename;
   res.send(createtemplate(arcticles[arcticlename]));
